@@ -618,6 +618,7 @@ print(i)
 new_data_build -&gt; who_where_when_df
 rm(new_data_build)</code></pre>
 <hr />
+<p>Now, because I ran the above script separate from the RMarkdown – and I want to use the df that the loop made for the following scripts – I’m writing the df out as a csv and reading it back in as a df that can then be used. (Note: interesting enough – even if a df object exists in the global environment the RMarkdown can’t access it unless it creates it, or it is read in as I did below.)</p>
 <pre class="r"><code>write.csv(who_where_when_df, &quot;who_where_when_df.csv&quot;, row.names = FALSE)</code></pre>
 <hr />
 </div>

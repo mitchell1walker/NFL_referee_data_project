@@ -11,6 +11,16 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 #rm(df_1, df_2, spl, spl.1, x, y, z, game_data, game_data_1, game_data_2, Test, tables, webpage)
+
+# install.packages("dplyr")
+# install.packages("tidyr")
+# install.packages("rvest")
+# install.packages("xml2")
+# install.packages("stringi")
+# 
+# packrat::status()
+# packrat::snapshot()
+# packrat::restore()
 ```
 
 ## The Goal of this Project
@@ -431,8 +441,6 @@ rm(new_data_build)
 Now, because I ran the above script separate from the RMarkdown -- and I want to use the df that the loop made for the following scripts -- I'm writing the df out as a csv and reading it back in as a df that can then be used. (Note: interesting enough -- even if a df object exists in the global environment the RMarkdown can't access it unless it creates it, or it is read in as I did below.)
 ```{r eval=FALSE}
 write.csv(who_where_when_df, "who_where_when_df.csv", row.names = FALSE)
-
-who_where_when_df <- read.csv("who_where_when_df.csv", stringsAsFactors = F)
 ```
 
 
@@ -442,6 +450,8 @@ who_where_when_df <- read.csv("who_where_when_df.csv", stringsAsFactors = F)
 
 Now that I have all the data that I need to create the urls with -- remember? … the urls we'll use for the website with the play-by-play data -- I need to do a little wrangling first. First, I have to get the "home" and "away" locals -- as well as the home and away team names in all lowercase. 
 ```{r}
+who_where_when_df <- read.csv("who_where_when_df.csv", stringsAsFactors = F)
+
 url_data <- left_join(who_where_when_df, just_teams, by = c("home_team" = "TEAM_NAMES"))
 names(url_data)[9] <- "home_locals"
 
